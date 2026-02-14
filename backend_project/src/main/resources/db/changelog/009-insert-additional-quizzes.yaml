@@ -1,0 +1,270 @@
+databaseChangeLog:
+  - changeSet:
+      id: 009-insert-additional-quizzes
+      author: team
+      changes:
+        # Quiz for Course 2 - Communication et interactions (lesson 5: Modeles de communication)
+        - insert:
+            tableName: quizzes
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: lesson_id, valueNumeric: 5 }
+              - column: { name: titre, value: "Quiz - Communication en groupe" }
+              - column: { name: description, value: "Testez vos connaissances sur les reseaux et modeles de communication dans les groupes." }
+              - column: { name: xp_reward, valueNumeric: 30 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 6 }
+              - column: { name: quiz_id, valueNumeric: 3 }
+              - column: { name: question, value: "Quel reseau de communication est le plus efficace pour les taches simples ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 20 }
+              - column: { name: question_id, valueNumeric: 6 }
+              - column: { name: libelle, value: "Le reseau en cercle" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 21 }
+              - column: { name: question_id, valueNumeric: 6 }
+              - column: { name: libelle, value: "Le reseau en etoile (roue)" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 22 }
+              - column: { name: question_id, valueNumeric: 6 }
+              - column: { name: libelle, value: "Le reseau complet" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 23 }
+              - column: { name: question_id, valueNumeric: 6 }
+              - column: { name: libelle, value: "Le reseau en chaine" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 7 }
+              - column: { name: quiz_id, valueNumeric: 3 }
+              - column: { name: question, value: "Quel reseau de communication est ideal pour les taches complexes et la creativite ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 24 }
+              - column: { name: question_id, valueNumeric: 7 }
+              - column: { name: libelle, value: "Le reseau en chaine" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 25 }
+              - column: { name: question_id, valueNumeric: 7 }
+              - column: { name: libelle, value: "Le reseau en Y" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 26 }
+              - column: { name: question_id, valueNumeric: 7 }
+              - column: { name: libelle, value: "Le reseau complet (tous canaux)" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 27 }
+              - column: { name: question_id, valueNumeric: 7 }
+              - column: { name: libelle, value: "Le reseau en etoile" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 8 }
+              - column: { name: quiz_id, valueNumeric: 3 }
+              - column: { name: question, value: "Qui a identifie les differentes structures de reseaux de communication (chaine, cercle, etoile) ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 28 }
+              - column: { name: question_id, valueNumeric: 8 }
+              - column: { name: libelle, value: "Kurt Lewin" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 29 }
+              - column: { name: question_id, valueNumeric: 8 }
+              - column: { name: libelle, value: "Bavelas et Leavitt" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 30 }
+              - column: { name: question_id, valueNumeric: 8 }
+              - column: { name: libelle, value: "Robert Bales" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 31 }
+              - column: { name: question_id, valueNumeric: 8 }
+              - column: { name: libelle, value: "Charles Cooley" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        # Quiz for Course 4 - Gestion des conflits (lesson 10: Techniques de resolution)
+        - insert:
+            tableName: quizzes
+            columns:
+              - column: { name: id, valueNumeric: 4 }
+              - column: { name: lesson_id, valueNumeric: 10 }
+              - column: { name: titre, value: "Quiz - Resolution des conflits" }
+              - column: { name: description, value: "Evaluez votre maitrise des strategies de resolution de conflits en groupe." }
+              - column: { name: xp_reward, valueNumeric: 30 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 9 }
+              - column: { name: quiz_id, valueNumeric: 4 }
+              - column: { name: question, value: "Quelle strategie de resolution de conflit vise une solution gagnant-gagnant ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 32 }
+              - column: { name: question_id, valueNumeric: 9 }
+              - column: { name: libelle, value: "L'evitement" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 33 }
+              - column: { name: question_id, valueNumeric: 9 }
+              - column: { name: libelle, value: "Le compromis" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 34 }
+              - column: { name: question_id, valueNumeric: 9 }
+              - column: { name: libelle, value: "La collaboration" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 35 }
+              - column: { name: question_id, valueNumeric: 9 }
+              - column: { name: libelle, value: "La competition" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 10 }
+              - column: { name: quiz_id, valueNumeric: 4 }
+              - column: { name: question, value: "Quelle methode de communication consiste a observer sans juger, exprimer ses sentiments et formuler une demande ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 36 }
+              - column: { name: question_id, valueNumeric: 10 }
+              - column: { name: libelle, value: "La negociation raisonnee" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 37 }
+              - column: { name: question_id, valueNumeric: 10 }
+              - column: { name: libelle, value: "La communication non-violente (CNV)" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 38 }
+              - column: { name: question_id, valueNumeric: 10 }
+              - column: { name: libelle, value: "L'ecoute active" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 39 }
+              - column: { name: question_id, valueNumeric: 10 }
+              - column: { name: libelle, value: "La mediation" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 11 }
+              - column: { name: quiz_id, valueNumeric: 4 }
+              - column: { name: question, value: "Selon le modele de Glasl, a quels niveaux de conflit peut-on encore resoudre les tensions par la discussion ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 40 }
+              - column: { name: question_id, valueNumeric: 11 }
+              - column: { name: libelle, value: "Niveaux 1 a 3" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 41 }
+              - column: { name: question_id, valueNumeric: 11 }
+              - column: { name: libelle, value: "Niveaux 4 a 6" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 42 }
+              - column: { name: question_id, valueNumeric: 11 }
+              - column: { name: libelle, value: "Niveaux 7 a 9" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 43 }
+              - column: { name: question_id, valueNumeric: 11 }
+              - column: { name: libelle, value: "Tous les niveaux" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }

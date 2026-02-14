@@ -1,0 +1,81 @@
+databaseChangeLog:
+  - changeSet:
+      id: 007-create-badges-tables
+      author: team
+      changes:
+        - createTable:
+            tableName: badges
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: nom
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: icone
+                  type: varchar(100)
+              - column:
+                  name: condition_type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: condition_valeur
+                  type: int
+                  constraints:
+                    nullable: false
+
+        - createTable:
+            tableName: user_badges
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: badge_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_obtention
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_badges
+            constraintName: fk_user_badges_user
+            referencedColumnNames: id
+            referencedTableName: users
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseColumnNames: badge_id
+            baseTableName: user_badges
+            constraintName: fk_user_badges_badge
+            referencedColumnNames: id
+            referencedTableName: badges
+            onDelete: CASCADE
+        - addUniqueConstraint:
+            tableName: user_badges
+            columnNames: user_id, badge_id
+            constraintName: uk_user_badge

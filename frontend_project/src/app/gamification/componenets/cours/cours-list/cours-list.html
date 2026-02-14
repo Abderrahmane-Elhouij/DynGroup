@@ -1,0 +1,65 @@
+<div class="card">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-8 gap-4">
+        <div>
+            <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 m-0 mb-2">Catalogue des cours</h1>
+            <p class="text-surface-500 dark:text-surface-400 m-0">Decouvrez les cours sur la dynamique des groupes</p>
+        </div>
+        <div class="flex gap-4">
+            <p-iconfield>
+                <p-inputicon class="pi pi-search" />
+                <input pInputText placeholder="Rechercher..." [(ngModel)]="searchTerm" (input)="filterCourses()" />
+            </p-iconfield>
+            <p-select [options]="difficultyOptions" [(ngModel)]="selectedDifficulty" (onChange)="filterCourses()" placeholder="Difficulte" [showClear]="true" />
+        </div>
+    </div>
+
+    @if (loading()) {
+    <div class="grid grid-cols-12 gap-8">
+        @for (i of [1,2,3,4]; track i) {
+        <div class="col-span-12 md:col-span-6 xl:col-span-3">
+            <p-skeleton height="18rem" styleClass="rounded-xl" />
+        </div>
+        }
+    </div>
+    } @else {
+    <div class="grid grid-cols-12 gap-8">
+        @for (cours of filteredCourses(); track cours.id) {
+        <div class="col-span-12 md:col-span-6 xl:col-span-3">
+            <div class="border border-surface-200 dark:border-surface-700 rounded-xl overflow-hidden hover:shadow-lg transition-shadow h-full flex flex-col">
+                <div class="bg-primary/10 p-8 flex items-center justify-center">
+                    <i class="pi pi-book text-primary text-5xl"></i>
+                </div>
+                <div class="p-6 flex flex-col flex-1">
+                    <div class="flex items-center justify-between mb-3">
+                        <p-tag [value]="getDifficultyLabel(cours.difficulte)" [severity]="getDifficultyColor(cours.difficulte)" />
+                        <span class="text-surface-500 dark:text-surface-400 text-sm"> <i class="pi pi-clock mr-1"></i>{{ cours.dureeEstimee }}h </span>
+                    </div>
+                    <h3 class="text-lg font-bold text-surface-900 dark:text-surface-0 mb-2 m-0 line-clamp-2">{{ cours.titre }}</h3>
+                    <p class="text-surface-500 dark:text-surface-400 text-sm mb-4 flex-1 line-clamp-3 m-0">{{ cours.description }}</p>
+                    <div class="flex items-center gap-2 text-sm text-surface-500 dark:text-surface-400 mb-4">
+                        <span><i class="pi pi-folder mr-1"></i>{{ cours.nombreChapitres }} chapitres</span>
+                        <span class="text-surface-300">|</span>
+                        <span><i class="pi pi-file mr-1"></i>{{ cours.nombreLecons }} lecons</span>
+                    </div>
+                    @if (cours.inscrit) {
+                    <div class="mb-2">
+                        <div class="flex justify-between text-sm mb-1">
+                            <span class="text-surface-500 dark:text-surface-400">Progression</span>
+                            <span class="font-semibold text-primary">{{ cours.progression }}%</span>
+                        </div>
+                        <p-progressBar [value]="cours.progression" [showValue]="false" styleClass="h-2" />
+                    </div>
+                    }
+                    <p-button [label]="cours.inscrit ? 'Continuer' : 'Voir le cours'" [icon]="cours.inscrit ? 'pi pi-play' : 'pi pi-eye'" class="w-full" styleClass="w-full" [routerLink]="['/cours', cours.id]" />
+                </div>
+            </div>
+        </div>
+        } @empty {
+        <div class="col-span-12 text-center py-12">
+            <i class="pi pi-search text-5xl text-surface-300 dark:text-surface-600 mb-4 block"></i>
+            <p class="text-xl text-surface-500 dark:text-surface-400">Aucun cours ne correspond a votre recherche</p>
+        </div>
+        }
+    </div>
+    }
+</div>

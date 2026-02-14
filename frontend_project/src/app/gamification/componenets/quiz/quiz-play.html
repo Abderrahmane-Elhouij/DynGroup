@@ -1,0 +1,92 @@
+@if (loading()) {
+<div class="card">
+    <p-skeleton height="3rem" class="mb-4" />
+    <p-skeleton height="20rem" />
+</div>
+} @else if (result()) {
+<!-- Resultats -->
+<div class="card text-center">
+    <div class="flex items-center justify-center mb-6">
+        <div
+            class="flex items-center justify-center rounded-full"
+            style="width: 8rem; height: 8rem"
+            [class.bg-green-100]="isSuccess()"
+            [class.dark:bg-green-900]="isSuccess()"
+            [class.bg-orange-100]="!isSuccess()"
+            [class.dark:bg-orange-900]="!isSuccess()"
+        >
+            <i [class]="isSuccess() ? 'pi pi-check-circle text-green-500' : 'pi pi-info-circle text-orange-500'" class="text-6xl"></i>
+        </div>
+    </div>
+    <h1 class="text-3xl font-bold text-surface-900 dark:text-surface-0 mb-4">{{ isSuccess() ? 'Felicitations !' : 'Quiz termine' }}</h1>
+    <p class="text-xl text-surface-600 dark:text-surface-300 mb-2">Vous avez obtenu {{ result()!.score }} / {{ result()!.totalQuestions }} bonnes reponses</p>
+    <p class="text-lg mb-6"><span class="font-bold text-primary">+{{ result()!.xpGagne }} XP</span> gagnes</p>
+    @if (result()!.dejaRepondu) {
+    <p-message severity="info" text="Vous aviez deja repondu a ce quiz. Aucun XP supplementaire n'a ete attribue." class="mb-4 block" />
+    }
+    <div class="flex justify-center gap-4 mt-6">
+        <p-button label="Retour au cours" icon="pi pi-arrow-left" [outlined]="true" (onClick)="backToCourse()" />
+        <p-button label="Tableau de bord" icon="pi pi-home" routerLink="/" />
+    </div>
+</div>
+} @else if (quiz()) {
+<!-- Quiz en cours -->
+<div class="card mb-4">
+    <div class="flex items-center justify-between mb-4">
+        <div>
+            <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 m-0">{{ quiz()!.titre }}</h1>
+        </div>
+        <p-tag [value]="quiz()!.xpReward + ' XP'" icon="pi pi-star" severity="warn" styleClass="text-base px-3 py-2" />
+    </div>
+    @if (quiz()!.description) {
+    <p class="text-surface-600 dark:text-surface-300 m-0">{{ quiz()!.description }}</p>
+    }
+    <div class="mt-4">
+        <div class="flex justify-between text-sm mb-2">
+            <span class="text-surface-500 dark:text-surface-400">Question {{ currentIndex() + 1 }} sur {{ quiz()!.questions.length }}</span>
+            <span class="font-semibold text-primary">{{ progressPercent() }}%</span>
+        </div>
+        <p-progressBar [value]="progressPercent()" [showValue]="false" styleClass="h-2" />
+    </div>
+</div>
+
+<div class="card">
+    @if (currentQuestion(); as question) {
+    <h2 class="text-xl font-semibold text-surface-900 dark:text-surface-0 mb-6 m-0">{{ question.question }}</h2>
+    <div class="flex flex-col gap-4">
+        @if (question.typeQuestion === 'CHOIX_UNIQUE') { @for (option of question.options; track option.id) {
+        <div
+            class="flex items-center p-4 border border-surface-200 dark:border-surface-700 rounded-xl hover:bg-surface-50 dark:hover:bg-surface-800 transition-colors cursor-pointer"
+            [class.border-primary]="selectedAnswers()[question.id]?.[0] === option.id"
+            [class.bg-primary-50]="selectedAnswers()[question.id]?.[0] === option.id"
+            (click)="selectSingle(question.id, option.id)"
+        >
+            <p-radioButton [name]="'q_' + question.id" [value]="option.id" [ngModel]="selectedAnswers()[question.id]?.[0]" (ngModelChange)="selectSingle(question.id, option.id)" />
+            <label class="ml-3 cursor-pointer flex-1 text-surface-900 dark:text-surface-0">{{ option.libelle }}</label>
+        </div>
+        } } @else { @for (option of question.options; track option.id) {
+        <div
+            class="flex items-center p-4 border border-surface-200 dark:border-surface-700 rounded-xl hover:bg-surface-50 dark:hover:bg-surface-800 transition-colors cursor-pointer"
+            [class.border-primary]="isOptionSelected(question.id, option.id)"
+            [class.bg-primary-50]="isOptionSelected(question.id, option.id)"
+            (click)="toggleMultiple(question.id, option.id)"
+        >
+            <p-checkbox [binary]="true" [ngModel]="isOptionSelected(question.id, option.id)" (ngModelChange)="toggleMultiple(question.id, option.id)" />
+            <label class="ml-3 cursor-pointer flex-1 text-surface-900 dark:text-surface-0">{{ option.libelle }}</label>
+        </div>
+        } }
+    </div>
+
+    <p-divider />
+
+    <div class="flex items-center justify-between">
+        <p-button label="Precedent" icon="pi pi-arrow-left" [outlined]="true" [disabled]="currentIndex() === 0" (onClick)="previous()" />
+        @if (currentIndex() < quiz()!.questions.length - 1) {
+        <p-button label="Suivant" icon="pi pi-arrow-right" iconPos="right" [disabled]="!hasAnswer(currentQuestion()!.id)" (onClick)="next()" />
+        } @else {
+        <p-button label="Soumettre" icon="pi pi-check" severity="success" [disabled]="!allAnswered()" [loading]="submitting()" (onClick)="submit()" />
+        }
+    </div>
+    }
+</div>
+}

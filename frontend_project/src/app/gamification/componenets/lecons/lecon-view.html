@@ -1,0 +1,88 @@
+@if (loading()) {
+<div class="card">
+    <p-skeleton height="2rem" class="mb-4" />
+    <p-skeleton height="30rem" />
+</div>
+} @else if (lesson()) {
+<div class="card">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6 gap-4">
+        <div>
+            <p-button label="Retour au cours" icon="pi pi-arrow-left" [text]="true" [routerLink]="['/cours', lesson()!.courseId]" class="mb-2" />
+            <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 m-0">{{ lesson()!.titre }}</h1>
+            <div class="flex items-center gap-4 mt-2">
+                <span class="text-surface-500 dark:text-surface-400 text-sm"> <i class="pi pi-book mr-1"></i>{{ lesson()!.courseTitre }} </span>
+                <p-tag [value]="getTypeLabel(lesson()!.typeContenu)" severity="info" />
+                <span class="text-surface-500 dark:text-surface-400 text-sm"> <i class="pi pi-star mr-1"></i>{{ lesson()!.xpReward }} XP </span>
+            </div>
+        </div>
+        @if (lesson()!.statut === 'TERMINE') {
+        <p-tag value="Terminee" severity="success" icon="pi pi-check" styleClass="text-base px-4 py-2" />
+        }
+    </div>
+
+    <p-divider />
+
+    <div class="prose max-w-none dark:prose-invert mt-6" [innerHTML]="formattedContent()"></div>
+
+    <p-divider />
+
+    @if (completionMessage()) {
+    <p-message [severity]="'success'" [text]="completionMessage()!" class="mb-4 block" />
+    } @if (lesson()!.statut !== 'TERMINE') {
+    <div class="flex items-center justify-center mt-6 mb-4">
+        <p-button label="Marquer comme terminee" icon="pi pi-check" severity="success" size="large" [loading]="completing()" (onClick)="complete()" />
+    </div>
+    @if (lesson()!.quizzes && lesson()!.quizzes.length > 0) {
+    <div class="mt-4 p-4 border border-surface-200 dark:border-surface-700 rounded-xl bg-surface-50 dark:bg-surface-800 opacity-70">
+        <div class="flex items-center gap-3 text-surface-500 dark:text-surface-400">
+            <i class="pi pi-lock text-lg"></i>
+            <span class="font-medium">Terminez la lecon pour debloquer le quiz</span>
+        </div>
+    </div>
+    } } @if (lesson()!.statut === 'TERMINE' && lesson()!.quizzes && lesson()!.quizzes.length > 0) {
+    <div class="mt-6">
+        <h2 class="text-xl font-bold text-surface-900 dark:text-surface-0 mb-4 m-0"><i class="pi pi-question-circle mr-2 text-primary"></i>Quiz disponible</h2>
+        <div class="flex flex-col gap-3">
+            @for (quiz of lesson()!.quizzes; track quiz.id) {
+            <div class="p-6 border-2 border-primary/30 rounded-2xl bg-primary/5 dark:bg-primary/10">
+                <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-4">
+                    <div class="flex items-center gap-4">
+                        <div class="flex items-center justify-center bg-primary/15 rounded-full" style="width: 3.5rem; height: 3.5rem">
+                            <i class="pi pi-question-circle text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <div class="font-bold text-lg text-surface-900 dark:text-surface-0">{{ quiz.titre }}</div>
+                            @if (quiz.description) {
+                            <div class="text-surface-500 dark:text-surface-400 text-sm mt-1">{{ quiz.description }}</div>
+                            }
+                            <div class="flex items-center gap-4 mt-2">
+                                <span class="text-surface-500 dark:text-surface-400 text-sm"><i class="pi pi-list mr-1"></i>{{ quiz.nombreQuestions }} questions</span>
+                                <span class="text-primary font-semibold text-sm"><i class="pi pi-star mr-1"></i>{{ quiz.xpReward }} XP</span>
+                            </div>
+                        </div>
+                    </div>
+                    <p-button label="Passer le quiz" icon="pi pi-play" size="large" [routerLink]="['/quiz', quiz.id]" />
+                </div>
+            </div>
+            }
+        </div>
+    </div>
+    }
+
+    <p-divider />
+
+    <div class="flex items-center justify-between mt-4">
+        <div>
+            @if (lesson()!.previousLessonId) {
+            <p-button label="Lecon precedente" icon="pi pi-arrow-left" [outlined]="true" [routerLink]="['/lecons', lesson()!.previousLessonId]" />
+            }
+        </div>
+        <div class="flex gap-3">
+            <p-button label="Retour au cours" icon="pi pi-arrow-left" [outlined]="true" [routerLink]="['/cours', lesson()!.courseId]" />
+            @if (lesson()!.nextLessonId) {
+            <p-button label="Lecon suivante" icon="pi pi-arrow-right" iconPos="right" [routerLink]="['/lecons', lesson()!.nextLessonId]" />
+            }
+        </div>
+    </div>
+</div>
+}

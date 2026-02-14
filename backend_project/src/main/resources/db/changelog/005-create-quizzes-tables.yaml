@@ -1,0 +1,125 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-create-quizzes-tables
+      author: team
+      changes:
+        - createTable:
+            tableName: quizzes
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: lesson_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: titre
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+              - column:
+                  name: xp_reward
+                  type: int
+                  defaultValueNumeric: 20
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_creation
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: lesson_id
+            baseTableName: quizzes
+            constraintName: fk_quizzes_lesson
+            referencedColumnNames: id
+            referencedTableName: lessons
+            onDelete: CASCADE
+
+        - createTable:
+            tableName: quiz_questions
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: quiz_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: question
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type_question
+                  type: varchar(30)
+                  defaultValue: CHOIX_UNIQUE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ordre
+                  type: int
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: quiz_id
+            baseTableName: quiz_questions
+            constraintName: fk_questions_quiz
+            referencedColumnNames: id
+            referencedTableName: quizzes
+            onDelete: CASCADE
+
+        - createTable:
+            tableName: quiz_options
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: question_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: libelle
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: est_correcte
+                  type: boolean
+                  defaultValueBoolean: false
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ordre
+                  type: int
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: question_id
+            baseTableName: quiz_options
+            constraintName: fk_options_question
+            referencedColumnNames: id
+            referencedTableName: quiz_questions
+            onDelete: CASCADE

@@ -1,0 +1,80 @@
+<div class="card">
+    <h1 class="text-2xl font-bold text-surface-900 dark:text-surface-0 mb-2 m-0">Classement</h1>
+    <p class="text-surface-500 dark:text-surface-400 mb-8 m-0">Les meilleurs apprenants de la plateforme</p>
+
+    @if (loading()) { @for (i of [1, 2, 3, 4, 5]; track i) {
+    <div class="mb-4"><p-skeleton height="4rem" /></div>
+    } } @else {
+    <!-- Top 3 -->
+    @if (leaderboard().length >= 3) {
+    <div class="grid grid-cols-12 gap-6 mb-8">
+        <!-- 2eme -->
+        <div class="col-span-12 md:col-span-4 flex flex-col items-center order-2 md:order-1 mt-8 md:mt-8">
+            <div class="relative">
+                <p-avatar icon="pi pi-user" size="xlarge" shape="circle" styleClass="bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-gray-300" />
+                <div class="absolute -bottom-2 -right-2 bg-gray-400 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">2</div>
+            </div>
+            <span class="font-bold text-surface-900 dark:text-surface-0 mt-4">{{ leaderboard()[1].prenom }} {{ leaderboard()[1].nom }}</span>
+            <span class="text-surface-500 dark:text-surface-400 text-sm">{{ leaderboard()[1].xpTotal }} XP</span>
+            <p-tag value="Niveau {{ leaderboard()[1].niveau }}" severity="secondary" class="mt-2" />
+        </div>
+        <!-- 1er -->
+        <div class="col-span-12 md:col-span-4 flex flex-col items-center order-1 md:order-2">
+            <div class="relative">
+                <i class="pi pi-crown text-yellow-500 text-2xl block text-center mb-2"></i>
+                <p-avatar icon="pi pi-user" size="xlarge" shape="circle" styleClass="bg-yellow-100 dark:bg-yellow-900 text-yellow-600 dark:text-yellow-300" [style]="{ width: '5rem', height: '5rem', fontSize: '2rem' }"> </p-avatar>
+
+                <div class="absolute -bottom-2 -right-2 bg-yellow-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">1</div>
+            </div>
+            <span class="font-bold text-lg text-surface-900 dark:text-surface-0 mt-4">{{ leaderboard()[0].prenom }} {{ leaderboard()[0].nom }}</span>
+            <span class="text-primary font-semibold">{{ leaderboard()[0].xpTotal }} XP</span>
+            <p-tag value="Niveau {{ leaderboard()[0].niveau }}" severity="success" class="mt-2" />
+        </div>
+        <!-- 3eme -->
+        <div class="col-span-12 md:col-span-4 flex flex-col items-center order-3 mt-8 md:mt-8">
+            <div class="relative">
+                <p-avatar icon="pi pi-user" size="xlarge" shape="circle" styleClass="bg-orange-100 dark:bg-orange-900 text-orange-600 dark:text-orange-300" />
+                <div class="absolute -bottom-2 -right-2 bg-orange-400 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold text-sm">3</div>
+            </div>
+            <span class="font-bold text-surface-900 dark:text-surface-0 mt-4">{{ leaderboard()[2].prenom }} {{ leaderboard()[2].nom }}</span>
+            <span class="text-surface-500 dark:text-surface-400 text-sm">{{ leaderboard()[2].xpTotal }} XP</span>
+            <p-tag value="Niveau {{ leaderboard()[2].niveau }}" severity="warn" class="mt-2" />
+        </div>
+    </div>
+    }
+
+    <!-- Reste du classement -->
+    <div class="flex flex-col gap-3">
+        @for (entry of leaderboard().slice(3); track entry.rang) {
+        <div
+            class="flex items-center p-4 border border-surface-200 dark:border-surface-700 rounded-xl transition-colors"
+            [class.bg-primary-50]="isCurrentUser(entry)"
+            [class.dark:bg-primary-900]="isCurrentUser(entry)"
+            [class.border-primary]="isCurrentUser(entry)"
+        >
+            <span class="font-bold text-surface-500 dark:text-surface-400 w-12 text-center text-lg">{{ entry.rang }}</span>
+            <p-avatar icon="pi pi-user" shape="circle" styleClass="bg-surface-100 dark:bg-surface-800 text-surface-500 dark:text-surface-400" />
+            <div class="ml-4 flex-1">
+                <span class="font-semibold text-surface-900 dark:text-surface-0">
+                    {{ entry.prenom }} {{ entry.nom }} @if (isCurrentUser(entry)) {
+                    <span class="text-primary text-sm ml-2">(vous)</span>
+                    }
+                </span>
+                <div class="text-surface-500 dark:text-surface-400 text-sm">Niveau {{ entry.niveau }}</div>
+            </div>
+            <div class="flex items-center gap-2">
+                <i class="pi pi-star-fill text-yellow-500"></i>
+                <span class="font-bold text-surface-900 dark:text-surface-0">{{ entry.xpTotal }}</span>
+                <span class="text-surface-500 dark:text-surface-400 text-sm">XP</span>
+            </div>
+        </div>
+        }
+    </div>
+
+    @if (leaderboard().length === 0) {
+    <div class="text-center py-12">
+        <i class="pi pi-users text-5xl text-surface-300 dark:text-surface-600 mb-4 block"></i>
+        <p class="text-xl text-surface-500 dark:text-surface-400">Aucun classement disponible</p>
+    </div>
+    } }
+</div>

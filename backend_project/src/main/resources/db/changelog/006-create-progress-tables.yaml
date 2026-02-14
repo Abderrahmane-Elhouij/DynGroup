@@ -1,0 +1,160 @@
+databaseChangeLog:
+  - changeSet:
+      id: 006-create-progress-tables
+      author: team
+      changes:
+        - createTable:
+            tableName: user_progress
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: lesson_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: statut
+                  type: varchar(20)
+                  defaultValue: EN_COURS
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_completion
+                  type: timestamp
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_progress
+            constraintName: fk_progress_user
+            referencedColumnNames: id
+            referencedTableName: users
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseColumnNames: lesson_id
+            baseTableName: user_progress
+            constraintName: fk_progress_lesson
+            referencedColumnNames: id
+            referencedTableName: lessons
+            onDelete: CASCADE
+        - addUniqueConstraint:
+            tableName: user_progress
+            columnNames: user_id, lesson_id
+            constraintName: uk_user_lesson
+
+        - createTable:
+            tableName: user_quiz_attempts
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: quiz_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: score
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_questions
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: xp_earned
+                  type: int
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_tentative
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_quiz_attempts
+            constraintName: fk_attempts_user
+            referencedColumnNames: id
+            referencedTableName: users
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseColumnNames: quiz_id
+            baseTableName: user_quiz_attempts
+            constraintName: fk_attempts_quiz
+            referencedColumnNames: id
+            referencedTableName: quizzes
+            onDelete: CASCADE
+
+        - createTable:
+            tableName: user_course_enrollments
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: course_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_inscription
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: progression
+                  type: int
+                  defaultValueNumeric: 0
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: user_id
+            baseTableName: user_course_enrollments
+            constraintName: fk_enrollment_user
+            referencedColumnNames: id
+            referencedTableName: users
+            onDelete: CASCADE
+        - addForeignKeyConstraint:
+            baseColumnNames: course_id
+            baseTableName: user_course_enrollments
+            constraintName: fk_enrollment_course
+            referencedColumnNames: id
+            referencedTableName: courses
+            onDelete: CASCADE
+        - addUniqueConstraint:
+            tableName: user_course_enrollments
+            columnNames: user_id, course_id
+            constraintName: uk_user_course

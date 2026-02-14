@@ -1,0 +1,49 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: gamification_db
+    environment:
+      POSTGRES_DB: gamification_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build:
+      context: ./backend_project
+      dockerfile: Dockerfile
+    container_name: gamification_backend
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_NAME: gamification_db
+      DB_USERNAME: postgres
+      DB_PASSWORD: postgres
+      SERVER_PORT: 8080
+      JWT_SECRET: MaSuperCleSecretePourJWTQuiDoitEtreTresLongue2024PourLaSecurite
+    ports:
+      - "8080:8080"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  frontend:
+    build:
+      context: ./frontend_project
+      dockerfile: Dockerfile
+    container_name: gamification_frontend
+    ports:
+      - "4200:80"
+    depends_on:
+      - backend
+
+volumes:
+  postgres_data:

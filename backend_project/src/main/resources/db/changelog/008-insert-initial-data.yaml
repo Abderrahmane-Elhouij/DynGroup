@@ -1,0 +1,489 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-insert-initial-data
+      author: team
+      changes:
+        - insert:
+            tableName: courses
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: titre, value: "Introduction a la dynamique des groupes" }
+              - column: { name: description, value: "Decouvrez les fondements de la dynamique des groupes : definition, historique, et les principaux concepts qui regissent le fonctionnement des groupes restreints et des equipes." }
+              - column: { name: duree_estimee, value: "8 heures" }
+              - column: { name: difficulte, value: "DEBUTANT" }
+        - insert:
+            tableName: courses
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: titre, value: "Communication et interactions dans le groupe" }
+              - column: { name: description, value: "Apprenez les mecanismes de communication au sein des groupes, les reseaux de communication, les roles et statuts, ainsi que les techniques pour ameliorer les echanges interpersonnels." }
+              - column: { name: duree_estimee, value: "10 heures" }
+              - column: { name: difficulte, value: "INTERMEDIAIRE" }
+        - insert:
+            tableName: courses
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: titre, value: "Leadership et prise de decision collective" }
+              - column: { name: description, value: "Explorez les differents styles de leadership, les processus de prise de decision en groupe, et les techniques d'animation pour faciliter le travail collaboratif." }
+              - column: { name: duree_estimee, value: "12 heures" }
+              - column: { name: difficulte, value: "INTERMEDIAIRE" }
+        - insert:
+            tableName: courses
+            columns:
+              - column: { name: id, valueNumeric: 4 }
+              - column: { name: titre, value: "Gestion des conflits et cohesion de groupe" }
+              - column: { name: description, value: "Maitrisez les strategies de resolution de conflits, comprenez les sources de tension dans les groupes, et decouvrez comment renforcer la cohesion et la solidarite au sein d'une equipe." }
+              - column: { name: duree_estimee, value: "10 heures" }
+              - column: { name: difficulte, value: "AVANCE" }
+
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: course_id, valueNumeric: 1 }
+              - column: { name: titre, value: "Qu'est-ce qu'un groupe ?" }
+              - column: { name: description, value: "Definition et caracteristiques fondamentales d'un groupe" }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: course_id, valueNumeric: 1 }
+              - column: { name: titre, value: "Histoire de la dynamique des groupes" }
+              - column: { name: description, value: "De Kurt Lewin aux theories modernes" }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: course_id, valueNumeric: 1 }
+              - column: { name: titre, value: "Types et classifications des groupes" }
+              - column: { name: description, value: "Groupes primaires, secondaires, formels et informels" }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 4 }
+              - column: { name: course_id, valueNumeric: 2 }
+              - column: { name: titre, value: "Les reseaux de communication" }
+              - column: { name: description, value: "Modeles de communication en chaine, en cercle, en etoile et en reseau complet" }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 5 }
+              - column: { name: course_id, valueNumeric: 2 }
+              - column: { name: titre, value: "Roles et statuts dans le groupe" }
+              - column: { name: description, value: "Comprendre les roles formels et informels et leur impact sur la dynamique du groupe" }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 6 }
+              - column: { name: course_id, valueNumeric: 3 }
+              - column: { name: titre, value: "Les styles de leadership" }
+              - column: { name: description, value: "Autoritaire, democratique, laisser-faire et leadership situationnel" }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 7 }
+              - column: { name: course_id, valueNumeric: 3 }
+              - column: { name: titre, value: "Processus de decision en groupe" }
+              - column: { name: description, value: "Consensus, vote majoritaire, methode Delphi et brainstorming" }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 8 }
+              - column: { name: course_id, valueNumeric: 4 }
+              - column: { name: titre, value: "Sources et types de conflits" }
+              - column: { name: description, value: "Identifier les origines des tensions et les differentes formes de conflits dans un groupe" }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: chapters
+            columns:
+              - column: { name: id, valueNumeric: 9 }
+              - column: { name: course_id, valueNumeric: 4 }
+              - column: { name: titre, value: "Strategies de resolution" }
+              - column: { name: description, value: "Negociation, mediation, arbitrage et techniques collaboratives" }
+              - column: { name: ordre, valueNumeric: 2 }
+
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: chapter_id, valueNumeric: 1 }
+              - column: { name: titre, value: "Definition d'un groupe restreint" }
+              - column: { name: contenu, value: "Un groupe restreint est un ensemble de personnes (generalement entre 3 et 15) liees par des interactions regulieres, partageant des objectifs communs et developpant un sentiment d'appartenance. Selon Didier Anzieu, un groupe restreint se caracterise par : le nombre restreint de membres, des relations interpersonnelles directes, la poursuite d'objectifs communs, et l'existence de normes et de roles.\n\nLes caracteristiques fondamentales d'un groupe sont :\n\n1. L'interaction : Les membres communiquent et s'influencent mutuellement.\n2. L'interdependance : Le comportement de chaque membre affecte les autres.\n3. Les normes : Des regles implicites ou explicites regulent le fonctionnement du groupe.\n4. Les objectifs communs : Le groupe poursuit des buts partages par ses membres.\n5. Le sentiment d'appartenance : Les membres se reconnaissent comme faisant partie du groupe." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "20 min" }
+              - column: { name: xp_reward, valueNumeric: 15 }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: chapter_id, valueNumeric: 1 }
+              - column: { name: titre, value: "Distinction entre groupe et equipe" }
+              - column: { name: contenu, value: "Il est essentiel de distinguer un groupe d'une equipe. Tandis qu'un groupe est un ensemble de personnes reunies, une equipe implique une coordination structuree vers un objectif precis.\n\nLe groupe :\n- Reunion de personnes avec un interet commun\n- Les membres peuvent travailler de maniere independante\n- La responsabilite est individuelle\n\nL'equipe :\n- Interdependance forte entre les membres\n- Complementarite des competences\n- Responsabilite collective\n- Synergie : le resultat collectif depasse la somme des contributions individuelles\n\nCette distinction est cruciale en dynamique des groupes car elle influence les strategies d'animation et de management a adopter." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "15 min" }
+              - column: { name: xp_reward, valueNumeric: 10 }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: chapter_id, valueNumeric: 2 }
+              - column: { name: titre, value: "Kurt Lewin et les fondements" }
+              - column: { name: contenu, value: "Kurt Lewin (1890-1947) est considere comme le pere fondateur de la dynamique des groupes. Psychologue americain d'origine allemande, il a developpe la theorie du champ et conduit des experiences pionniere sur le leadership et le changement social.\n\nSes contributions majeures :\n\n1. La theorie du champ : Le comportement est fonction de la personne et de son environnement (B = f(P, E)).\n2. Les experiences sur le leadership : En 1939, avec Lippitt et White, il etudie trois styles de leadership (autoritaire, democratique, laisser-faire) et leurs effets sur les groupes.\n3. La recherche-action : Methode combinant recherche scientifique et action sociale.\n4. Les T-Groups : Groupes de formation a la dynamique des groupes, bases sur l'experimentation directe.\n\nLewin a demontre que le groupe n'est pas simplement la somme de ses parties, mais un systeme dynamique avec des proprietes emergentes." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "25 min" }
+              - column: { name: xp_reward, valueNumeric: 20 }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 4 }
+              - column: { name: chapter_id, valueNumeric: 3 }
+              - column: { name: titre, value: "Groupes primaires et secondaires" }
+              - column: { name: contenu, value: "Charles Cooley a introduit la distinction fondamentale entre groupes primaires et secondaires.\n\nGroupes primaires :\n- Relations intimes et directes (face a face)\n- Forte composante affective\n- Exemples : famille, groupe d'amis proches\n- Role essentiel dans la socialisation\n\nGroupes secondaires :\n- Relations plus formelles et fonctionnelles\n- Taille plus importante\n- Exemples : entreprise, association professionnelle\n- Objectifs instrumentaux predominants\n\nGroupes formels vs informels :\n- Formels : structure officielle, roles definis, regles explicites\n- Informels : emergence spontanee, relations affinitaires, normes implicites\n\nCette classification permet de mieux comprendre les dynamiques specifiques a chaque type de groupe et d'adapter les strategies d'intervention en consequence." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "20 min" }
+              - column: { name: xp_reward, valueNumeric: 15 }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 5 }
+              - column: { name: chapter_id, valueNumeric: 4 }
+              - column: { name: titre, value: "Modeles de communication en groupe" }
+              - column: { name: contenu, value: "Les reseaux de communication decrivent comment l'information circule dans un groupe. Bavelas et Leavitt ont identifie plusieurs structures fondamentales :\n\n1. Le reseau en chaine : L'information passe d'un membre a l'autre de maniere lineaire. Efficace pour les taches simples mais lent.\n\n2. Le reseau en Y : Variante de la chaine avec un embranchement. Un membre central controle le flux d'information.\n\n3. Le reseau en etoile (roue) : Un membre central est connecte a tous les autres. Tres efficace pour les taches simples, mais le membre central peut etre surcharge.\n\n4. Le reseau en cercle : Chaque membre communique avec ses deux voisins. Egalitaire mais relativement lent.\n\n5. Le reseau complet (tous canaux) : Chaque membre peut communiquer avec tous les autres. Ideal pour les taches complexes et la creativite.\n\nLe choix du reseau de communication influence la satisfaction des membres, l'efficacite du groupe et l'emergence du leadership." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "25 min" }
+              - column: { name: xp_reward, valueNumeric: 20 }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 6 }
+              - column: { name: chapter_id, valueNumeric: 5 }
+              - column: { name: titre, value: "Les roles dans le groupe" }
+              - column: { name: contenu, value: "Dans tout groupe, les membres assument differents roles qui influencent la dynamique collective. Robert Bales distingue deux grandes categories de roles :\n\nRoles centres sur la tache :\n- L'initiateur : propose des idees et des solutions\n- L'informateur : fournit des faits et des donnees\n- Le coordinateur : organise et synthetise les contributions\n- L'evaluateur : examine de maniere critique les propositions\n\nRoles centres sur le socio-affectif :\n- L'encourageur : soutient et valorise les contributions des autres\n- L'harmonisateur : reduit les tensions et facilite les compromis\n- Le regulateur : veille au respect des regles et au temps de parole\n- L'observateur : remarque les processus de groupe et les signale\n\nRoles dysfonctionnels :\n- Le dominateur : cherche a imposer ses vues\n- Le bloqueur : s'oppose systematiquement\n- Le deserteur : se retire des activites du groupe\n\nComprendre ces roles permet d'ameliorer le fonctionnement du groupe et d'intervenir de maniere appropriee." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "20 min" }
+              - column: { name: xp_reward, valueNumeric: 15 }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 7 }
+              - column: { name: chapter_id, valueNumeric: 6 }
+              - column: { name: titre, value: "Les trois styles de leadership de Lewin" }
+              - column: { name: contenu, value: "L'experience de Lewin, Lippitt et White (1939) reste une reference incontournable dans l'etude du leadership. Trois styles ont ete identifies :\n\n1. Leadership autoritaire (autocratique) :\n- Le leader prend toutes les decisions\n- Il donne des ordres precis sans les justifier\n- Il ne participe pas au travail du groupe\n- Resultat : haute productivite en presence du leader, mais agressivite et dependance des membres\n\n2. Leadership democratique (participatif) :\n- Les decisions sont prises collectivement avec la facilitation du leader\n- Le leader explique ses suggestions et encourage la discussion\n- Il participe au travail sans tout diriger\n- Resultat : bonne productivite maintenue meme en son absence, satisfaction elevee, cohesion forte\n\n3. Leadership laisser-faire :\n- Le leader n'intervient pas ou tres peu\n- Les membres sont libres de faire ce qu'ils veulent\n- Aucune structure n'est proposee\n- Resultat : produztivite faible, frustration frequente, manque de direction\n\nCes travaux ont demontre que le style de leadership influence directement le climat du groupe, sa productivite et la satisfaction de ses membres." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "30 min" }
+              - column: { name: xp_reward, valueNumeric: 25 }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 8 }
+              - column: { name: chapter_id, valueNumeric: 7 }
+              - column: { name: titre, value: "Methodes de prise de decision collective" }
+              - column: { name: contenu, value: "La prise de decision en groupe peut suivre differentes methodes, chacune ayant ses avantages et ses limites :\n\n1. La decision par autorite : Le leader decide seul apres consultation. Rapide mais peu engageante.\n\n2. Le vote majoritaire : La decision est prise a la majorite. Democratique mais peut frustrer la minorite.\n\n3. Le consensus : Tous les membres doivent accepter la decision. Long mais tres engageant. Necessite une communication ouverte et une ecoute active.\n\n4. La methode Delphi : Consultation anonyme et iterative d'experts. Utile pour eviter la pression de conformite.\n\n5. Le brainstorming : Generation libre d'idees sans critique. Favorise la creativite et l'innovation.\n\n6. La technique du groupe nominal : Les membres proposent des idees individuellement avant de les discuter et de voter. Combine les avantages du travail individuel et collectif.\n\nLe phenomene de groupthink (pensee de groupe) est un piege majeur : la recherche excessive de consensus peut conduire a des decisions irrationnelles. Irving Janis a identifie ce phenomene en etudiant de grandes decisions politiques erronees." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "25 min" }
+              - column: { name: xp_reward, valueNumeric: 20 }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 9 }
+              - column: { name: chapter_id, valueNumeric: 8 }
+              - column: { name: titre, value: "Origines et nature des conflits" }
+              - column: { name: contenu, value: "Les conflits dans les groupes sont inevitables et peuvent etre constructifs ou destructifs. Comprendre leurs sources est essentiel pour les gerer efficacement.\n\nSources principales des conflits :\n\n1. Conflits d'interets : Ressources limitees, objectifs incompatibles entre membres.\n2. Conflits de valeurs : Differences culturelles, ethiques ou philosophiques.\n3. Conflits de pouvoir : Lutte pour l'influence et le controle.\n4. Conflits relationnels : Antipathies personnelles, malentendus, meconnaissance.\n5. Conflits cognitifs : Desaccords sur les informations, les interpretations ou les methodes.\n\nNiveaux de conflit (selon Glasl) :\n- Niveau 1-3 : Tensions et debats pouvant etre resolus par la discussion\n- Niveau 4-6 : Les positions se durcissent, la communication se deteriore\n- Niveau 7-9 : Escalade destructive, perte de controle\n\nLe conflit n'est pas toujours negatif : un conflit cognitif bien gere peut stimuler la creativite et la qualite des decisions du groupe." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "25 min" }
+              - column: { name: xp_reward, valueNumeric: 20 }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: lessons
+            columns:
+              - column: { name: id, valueNumeric: 10 }
+              - column: { name: chapter_id, valueNumeric: 9 }
+              - column: { name: titre, value: "Techniques de resolution de conflits" }
+              - column: { name: contenu, value: "Plusieurs strategies et techniques permettent de gerer et resoudre les conflits en groupe :\n\n1. L'evitement : On ignore temporairement le conflit. Utile quand le sujet est mineur.\n2. L'accommodation : Un partie cede pour maintenir la relation. Risque de ressentiment.\n3. La competition : Chacun cherche a gagner. Adapte en situation d'urgence.\n4. Le compromis : Chaque partie fait des concessions. Solution rapide mais parfois insatisfaisante.\n5. La collaboration : Recherche d'une solution gagnant-gagnant. Ideale mais prend du temps.\n\nTechniques specifiques :\n- L'ecoute active : Reformuler, questionner, montrer de l'empathie\n- La communication non-violente (CNV) : Observer sans juger, exprimer ses sentiments, identifier ses besoins, formuler une demande\n- La mediation : Un tiers neutre aide les parties a trouver une solution\n- La negociation raisonnee (methode Harvard) : Se concentrer sur les interets plutot que les positions\n\nLa cohesion de groupe se renforce lorsque les conflits sont resolus de maniere constructive, creant ainsi un climat de confiance et de respect mutuel." }
+              - column: { name: type_contenu, value: "TEXTE" }
+              - column: { name: duree_estimee, value: "30 min" }
+              - column: { name: xp_reward, valueNumeric: 25 }
+              - column: { name: ordre, valueNumeric: 1 }
+
+        - insert:
+            tableName: quizzes
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: lesson_id, valueNumeric: 1 }
+              - column: { name: titre, value: "Quiz - Definition d'un groupe" }
+              - column: { name: description, value: "Testez vos connaissances sur la definition et les caracteristiques d'un groupe restreint." }
+              - column: { name: xp_reward, valueNumeric: 30 }
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: quiz_id, valueNumeric: 1 }
+              - column: { name: question, value: "Combien de membres compte generalement un groupe restreint ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: question_id, valueNumeric: 1 }
+              - column: { name: libelle, value: "2 a 5 personnes" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: question_id, valueNumeric: 1 }
+              - column: { name: libelle, value: "3 a 15 personnes" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: question_id, valueNumeric: 1 }
+              - column: { name: libelle, value: "20 a 50 personnes" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 4 }
+              - column: { name: question_id, valueNumeric: 1 }
+              - column: { name: libelle, value: "Plus de 100 personnes" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: quiz_id, valueNumeric: 1 }
+              - column: { name: question, value: "Qui est considere comme le pere fondateur de la dynamique des groupes ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 5 }
+              - column: { name: question_id, valueNumeric: 2 }
+              - column: { name: libelle, value: "Sigmund Freud" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 6 }
+              - column: { name: question_id, valueNumeric: 2 }
+              - column: { name: libelle, value: "Kurt Lewin" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 7 }
+              - column: { name: question_id, valueNumeric: 2 }
+              - column: { name: libelle, value: "Carl Rogers" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 8 }
+              - column: { name: question_id, valueNumeric: 2 }
+              - column: { name: libelle, value: "Jean Piaget" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: quiz_id, valueNumeric: 1 }
+              - column: { name: question, value: "Quelle est la formule de la theorie du champ de Lewin ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 9 }
+              - column: { name: question_id, valueNumeric: 3 }
+              - column: { name: libelle, value: "B = f(P, E)" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 10 }
+              - column: { name: question_id, valueNumeric: 3 }
+              - column: { name: libelle, value: "E = mc2" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 11 }
+              - column: { name: question_id, valueNumeric: 3 }
+              - column: { name: libelle, value: "G = S + I" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 12 }
+              - column: { name: question_id, valueNumeric: 3 }
+              - column: { name: libelle, value: "P = R x T" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        - insert:
+            tableName: quizzes
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: lesson_id, valueNumeric: 7 }
+              - column: { name: titre, value: "Quiz - Styles de leadership" }
+              - column: { name: description, value: "Evaluez votre comprehension des differents styles de leadership." }
+              - column: { name: xp_reward, valueNumeric: 30 }
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 4 }
+              - column: { name: quiz_id, valueNumeric: 2 }
+              - column: { name: question, value: "Quel style de leadership produit la meilleure satisfaction des membres ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 13 }
+              - column: { name: question_id, valueNumeric: 4 }
+              - column: { name: libelle, value: "Autoritaire" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 14 }
+              - column: { name: question_id, valueNumeric: 4 }
+              - column: { name: libelle, value: "Democratique" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 15 }
+              - column: { name: question_id, valueNumeric: 4 }
+              - column: { name: libelle, value: "Laisser-faire" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+
+        - insert:
+            tableName: quiz_questions
+            columns:
+              - column: { name: id, valueNumeric: 5 }
+              - column: { name: quiz_id, valueNumeric: 2 }
+              - column: { name: question, value: "Quel phenomene decrit la tendance du groupe a rechercher le consensus au detriment de la qualite de la decision ?" }
+              - column: { name: type_question, value: "CHOIX_UNIQUE" }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 16 }
+              - column: { name: question_id, valueNumeric: 5 }
+              - column: { name: libelle, value: "La facilitation sociale" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 1 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 17 }
+              - column: { name: question_id, valueNumeric: 5 }
+              - column: { name: libelle, value: "La pensee de groupe (groupthink)" }
+              - column: { name: est_correcte, valueBoolean: true }
+              - column: { name: ordre, valueNumeric: 2 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 18 }
+              - column: { name: question_id, valueNumeric: 5 }
+              - column: { name: libelle, value: "La paresse sociale" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 3 }
+        - insert:
+            tableName: quiz_options
+            columns:
+              - column: { name: id, valueNumeric: 19 }
+              - column: { name: question_id, valueNumeric: 5 }
+              - column: { name: libelle, value: "La polarisation de groupe" }
+              - column: { name: est_correcte, valueBoolean: false }
+              - column: { name: ordre, valueNumeric: 4 }
+
+        - insert:
+            tableName: badges
+            columns:
+              - column: { name: id, valueNumeric: 1 }
+              - column: { name: nom, value: "Premier pas" }
+              - column: { name: description, value: "Terminer votre premiere lecon" }
+              - column: { name: icone, value: "pi pi-star" }
+              - column: { name: condition_type, value: "LESSONS_COMPLETED" }
+              - column: { name: condition_valeur, valueNumeric: 1 }
+        - insert:
+            tableName: badges
+            columns:
+              - column: { name: id, valueNumeric: 2 }
+              - column: { name: nom, value: "Etudiant assidu" }
+              - column: { name: description, value: "Terminer 5 lecons" }
+              - column: { name: icone, value: "pi pi-book" }
+              - column: { name: condition_type, value: "LESSONS_COMPLETED" }
+              - column: { name: condition_valeur, valueNumeric: 5 }
+        - insert:
+            tableName: badges
+            columns:
+              - column: { name: id, valueNumeric: 3 }
+              - column: { name: nom, value: "Expert en herbe" }
+              - column: { name: description, value: "Terminer 10 lecons" }
+              - column: { name: icone, value: "pi pi-trophy" }
+              - column: { name: condition_type, value: "LESSONS_COMPLETED" }
+              - column: { name: condition_valeur, valueNumeric: 10 }
+        - insert:
+            tableName: badges
+            columns:
+              - column: { name: id, valueNumeric: 4 }
+              - column: { name: nom, value: "Quiz master" }
+              - column: { name: description, value: "Obtenir un score parfait a un quiz" }
+              - column: { name: icone, value: "pi pi-check-circle" }
+              - column: { name: condition_type, value: "PERFECT_QUIZ" }
+              - column: { name: condition_valeur, valueNumeric: 1 }
+        - insert:
+            tableName: badges
+            columns:
+              - column: { name: id, valueNumeric: 5 }
+              - column: { name: nom, value: "Niveau 5" }
+              - column: { name: description, value: "Atteindre le niveau 5" }
+              - column: { name: icone, value: "pi pi-bolt" }
+              - column: { name: condition_type, value: "LEVEL_REACHED" }
+              - column: { name: condition_valeur, valueNumeric: 5 }
+        - insert:
+            tableName: badges
+            columns:
+              - column: { name: id, valueNumeric: 6 }
+              - column: { name: nom, value: "Explorateur" }
+              - column: { name: description, value: "S'inscrire a 3 cours differents" }
+              - column: { name: icone, value: "pi pi-compass" }
+              - column: { name: condition_type, value: "COURSES_ENROLLED" }
+              - column: { name: condition_valeur, valueNumeric: 3 }

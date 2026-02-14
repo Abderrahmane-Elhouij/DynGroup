@@ -1,0 +1,61 @@
+databaseChangeLog:
+  - changeSet:
+      id: 004-create-lessons-table
+      author: team
+      changes:
+        - createTable:
+            tableName: lessons
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: chapter_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+              - column:
+                  name: titre
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: contenu
+                  type: text
+              - column:
+                  name: type_contenu
+                  type: varchar(30)
+                  defaultValue: TEXTE
+                  constraints:
+                    nullable: false
+              - column:
+                  name: duree_estimee
+                  type: varchar(50)
+              - column:
+                  name: xp_reward
+                  type: int
+                  defaultValueNumeric: 10
+                  constraints:
+                    nullable: false
+              - column:
+                  name: ordre
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_creation
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+        - addForeignKeyConstraint:
+            baseColumnNames: chapter_id
+            baseTableName: lessons
+            constraintName: fk_lessons_chapter
+            referencedColumnNames: id
+            referencedTableName: chapters
+            onDelete: CASCADE
